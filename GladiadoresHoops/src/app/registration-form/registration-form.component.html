@@ -1,0 +1,137 @@
+<div class="col-xs-12 text-center">
+  <h3>Registro de Equipos</h3>
+</div>
+<div class="col-sm-12">
+  <form [formGroup]="registrationForm" (ngSubmit)="onRegister()">
+    <h3>Dados del Equipo</h3>
+    <div class="row">
+      <div class="col-sm-4">
+        <label for="teamname">Nombre del Equipo:</label>
+        <input
+          type="text"
+          id="teamname"
+          formControlName="name"
+          class="form-control">
+      </div>
+      <div class="col-sm-2">
+        <label for="accCode">C&oacute;digo de Acceso:</label>
+        <input
+          type="text"
+          id="accCode"
+          formControlName="accessCode"
+          class="form-control">
+      </div>
+      <div class="col-sm-3">
+        <label for="city">Municipio</label>
+        <input
+          type="text"
+          id="city"
+          formControlName="city"
+          class="form-control">
+      </div>
+      <div class="col-sm-3">
+        <label for="state">Estado</label>
+        <input
+          type="text"
+          id="state"
+          formControlName="state"
+          class="form-control">
+      </div>
+    </div>
+    <h3>Dados del T&eacute;nico</h3>
+    <div formGroupName="coach">
+      <div class="row">
+        <div class="col-sm-3">
+          <label for="cName">Nombre</label>
+          <input
+            type="text"
+            id="cName"
+            formControlName="name"
+            class="form-control">
+        </div>
+        <div class="col-sm-2">
+          <label for="cCurp">Curp</label>
+          <input
+            type="text"
+            id="cCurp"
+            formControlName="curp"
+            class="form-control">
+        </div>
+        <div class="col-sm-3">
+          <label for="cBirthdate">Fecha de Nascimiento</label>
+          <input
+            type="date"
+            id="cBirthdate"
+            formControlName="birthdate"
+            class="form-control">
+        </div>
+        <div class="col-sm-2">
+          <label for="cEmail">Email</label>
+          <input
+            type="text"
+            id="cEmail"
+            formControlName="email"
+            class="form-control">
+        </div>
+        <div class="col-sm-2">
+          <label for="cPhone">Tel&eacute;fono</label>
+          <input
+            type="text"
+            id="cPhone"
+            formControlName="phone"
+            class="form-control">
+        </div>
+      </div>
+    </div>
+    <h3>Jugadores</h3>
+    <span class="help-block" *ngIf="registrationForm.get('players').controls.length <= 0">Ningum jugador cadastrado</span>
+    <div formArrayName="players">
+      <div
+        class="row"
+        *ngFor="let playerCtrl of registrationForm.get('players').controls; let i = index"
+        [formGroupName]="i"
+        style="margin-top: 10px;">
+          <div class="col-sm-3">
+            <label>Nombre</label>
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control">
+          </div>
+          <div class="col-sm-2">
+            <label>G&eacute;nero</label>
+            <select class="form-control" formControlName="gender">
+              <option *ngFor="let gender of genders"
+                      [value]="gender"> {{gender}}
+              </option>
+            </select>
+          </div>
+          <div class="col-sm-3">
+            <label >Fecha de Nascimiento</label>
+            <input
+              type="date"
+              formControlName="birthdate"
+              class="form-control">
+          </div>
+          <div class="col-sm-3">
+            <label>Posici&oacute;n</label>
+            <input
+              type="text"
+              formControlName="position"
+              class="form-control">
+          </div>
+          <div class="col-xs-1" style="padding-top: 2em">
+            <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onDeletePlayer(i)">X</button>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="form-group">
+      <button type="button" class="btn btn-success" (click)="onAddPlayer()">Incluir Jugador</button>
+      <button type="submit" class="btn btn-primary"> Registrar</button>
+    </div>
+  </form>
+</div>

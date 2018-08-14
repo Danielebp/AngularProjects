@@ -1,0 +1,47 @@
+<div class="col-sm-12" style="padding: 3em">
+  <h2 class="text-center"> Equipos Seleccionados</h2>
+  <hr style="margin-top: 3em;margin-bottom: 2em;">
+  <form [formGroup]="myAccessForm" (ngSubmit)="onSubmit()">
+    <div class="col-sm-12" formArrayName="selectedTeams">
+      <div class="row text-center font-weight-bold">
+        <div class="col-sm-4">
+          <label >Equipo</label>
+        </div>
+        <div class="col-sm-3">
+          <label>C&oacute;digo de Acceso</label>
+        </div>
+        <div class="col-sm-3">
+          <label>Status</label>
+        </div>
+        <div class="col-sm-2">
+          <label> </label>
+        </div>
+      </div>
+      <div class="row" style="padding-bottom: 1em" *ngFor="let teamCtrl of myAccessForm.get('selectedTeams').controls; let i = index" [formGroupName]="i">
+        <div class="col-sm-4">
+          <input type="text" class="form-control" formControlName="name">
+        </div>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" formControlName="accessCode">
+        </div>
+        <div class="col-sm-3">
+          <input type="text" class="form-control text-center" disabled formControlName="status">
+        </div>
+        <div class="col-sm-2">
+          <button type="button" class="btn btn-danger" (click)="onRevokeAccess(i)"> Borrar Equipo</button>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-12">
+          <button type="button" class="btn btn-primary" (click)="onGrantAccess()">
+            A&ntilde;adir Equipo
+          </button>
+          <button type="submit" class="btn btn-success">
+            Guardar Cambios
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,10 @@
+
+<div class="row">
+  <div class="col-sm-4" *ngFor="let team of teams" style="padding: 1em">
+    <a class="list-group-item">
+      <h4>Equipo: {{ team.name }}</h4>
+      <p>T&eacute;cnico: {{ team.coach.name}}</p>
+      <p>{{team.players.length}} jugadores</p>
+    </a>
+  </div>
+</div>
